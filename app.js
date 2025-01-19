@@ -10,9 +10,9 @@ function checkInputs()
     const difficulty = document.getElementById("difficultyDropdown").value;
     const dueDate = document.getElementById("dueDate").value;
 
-    //check if all inputs filled
+    //once all inputs in a row filled, call addTask
     //&& is for multiple conditions
-    //check each field separately
+    //have to check each field separately
     if(urgency !== 'selectOption' && importance !== 'selectOption' && difficulty !== 'selectOption' && taskName && dueDate )
     {
         addTask(taskName, urgency, importance, difficulty, dueDate);
@@ -29,11 +29,35 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
 {
     
     //calculate days until due using due date
-    //add to table
-    document.getElementById("daysUntilCell").textContent = daysUntilDue(dueDate);
+    var daysUntil = daysUntilDue(dueDate);
+    //update input row with days until due
+    document.getElementById("daysUntilCell").textContent = daysUntil;
+
+    //add new empty row on top table body
+    var tableBody = document.querySelector(".taskTable tbody");
+    var newRow = tableBody.insertRow(2);
+    // Insert the new cells (td elements) for each task attribute
+    newRow.innerHTML = `
+    <td>${taskName}</td>
+    <td>${urgency}</td>
+    <td>${importance}</td>
+    <td>${difficulty}</td>
+    <td>${dueDate}</td>
+    <td>${daysUntil}</td>
+    <td><input type="checkbox" onclick="deleteTask(this)"></td>
+    `;
+    
     //push instead of append bc more than 1+ new value to be added
     tasks.push({taskName, urgency, importance, difficulty,dueDate,daysUntil});
-    //console.log("Task Name: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
+    console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
+    
+    //clear input fields after adding task
+    document.getElementById("taskName").value = "";
+    document.getElementById("urgencyDropdown").value = "selectOption";
+    document.getElementById("importanceDropdown").value = "selectOption";
+    document.getElementById("difficultyDropdown").value = "selectOption";
+    document.getElementById("dueDate").value = "";
+    
 }
 
 //function takes in todays date and task due date, calculates days til due
@@ -46,4 +70,11 @@ function daysUntilDue(dueDate)
     //convert milliseconds to days, rounds up to whole number
     const daysUntil = Math.ceil(differenceMill/(1000 * 60 * 60 * 24));
     return daysUntil;
+}
+
+//deletes task
+function deleteTask(event)
+{
+    var row = event.closest("tr");
+    row.remove();
 }

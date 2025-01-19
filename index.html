@@ -16,6 +16,7 @@
     <div class = "toDoList">
         <h2>To Do List</h2>
         <table class="taskTable">
+            <tbody>
                 <tr>
                     <th>Task Name</th>
                     <th>Urgency</th>
@@ -23,6 +24,7 @@
                     <th>Difficulty</th>
                     <th>Due Date</th>
                     <th>Days Until Due</th>
+                    <th>Delete Task</th>
                 </tr>
                 <tr>
                     <td> <input type ="text" id="taskName"/></td>
@@ -49,13 +51,13 @@
                             <option value="veryHard">Very Hard</option>
                             </select>
                     </td>
-                    <!--once all inputs in a row filled, call addTask()-->
                     <!--onchange event listens to last input field (due date)-->
                     <td><input type = "date" id = "dueDate" onchange="checkInputs()"/></td>
-                    <td id="daysUntilCell"></td>
+                    <td id="daysUntilCell">0</td>
+                    <td><input type ="checkbox" onclick="deleteTask()"></td>
                 </tr>
+            </tbody>
         </table>
-        <p>Add another row/task option</p>
     </div>
 </div>
 <script src = "app.js"></script>
