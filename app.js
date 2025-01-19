@@ -46,11 +46,14 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     <td>${daysUntil}</td>
     <td><input type="checkbox" onclick="deleteTask(this)"></td>
     `;
-    
+
     //push instead of append bc more than 1+ new value to be added
     tasks.push({taskName, urgency, importance, difficulty,dueDate,daysUntil});
     console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
     
+    //add ondblclick to each created row and call editTask()
+    addEventListener("dblclick")
+
     //clear input fields after adding task
     document.getElementById("taskName").value = "";
     document.getElementById("urgencyDropdown").value = "selectOption";
@@ -70,6 +73,10 @@ function daysUntilDue(dueDate)
     //convert milliseconds to days, rounds up to whole number
     const daysUntil = Math.ceil(differenceMill/(1000 * 60 * 60 * 24));
     return daysUntil;
+}
+function editTask(event)
+{
+    alert("double clicked");
 }
 
 //deletes task
