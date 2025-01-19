@@ -1,0 +1,35 @@
+body{
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    
+}
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+}
+.container div {
+    margin: 10px;
+}
+.toDoList {
+    float: left;
+    text-align: left;
+    background-color: beige;
+  }
+.taskTable, th, td {
+    font-size: small;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: white;
+    border-spacing: 50%;
+    text-align: center;
+}
+
+
+div.eisenhowerMatrix {
+    text-align: center;
+    background-color:aliceblue;
+    float: right;
+  }
+  h1 {
+    text-align: center;
+  }
