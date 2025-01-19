@@ -11,7 +11,7 @@
 <div class = "container">
     <div class = "eisenhowerMatrix">
         <h2>Eisenhower Matrix</h2>
-        
+
     </div>
     <div class = "toDoList">
         <h2>To Do List</h2>
@@ -25,14 +25,37 @@
                     <th>Days Until Due</th>
                 </tr>
                 <tr>
-                    <td data-value=""></td>
-                    <td>dropdown</td>
-                    <td>dropdown</td>
-                    <td>dropdown</td>
-                    <td data-value=""></td>
-                    <td>calculation</td>
+                    <td> <input type ="text" id="taskName"/></td>
+                    <td>
+                        <select id="urgencyDropdown">
+                        <option value="selectOption">select</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="notUrgent">Not Urgent</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="importanceDropdown">
+                        <option value="selectOption">select</option>
+                        <option value="important">Important</option>
+                        <option value="notImportant">Not Important</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="difficultyDropdown">
+                            <option value="selectOption">select</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            <option value="veryHard">Very Hard</option>
+                            </select>
+                    </td>
+                    <!--once all inputs in a row filled, call addTask()-->
+                    <!--onchange event listens to last input field (due date)-->
+                    <td><input type = "date" id = "dueDate" onchange="checkInputs()"/></td>
+                    <td id="daysUntilCell"></td>
                 </tr>
         </table>
+        <p>Add another row/task option</p>
     </div>
 </div>
 <script src = "app.js"></script>
