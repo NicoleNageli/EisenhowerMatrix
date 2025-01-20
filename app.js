@@ -52,7 +52,9 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
     
     //add ondblclick to each created row and call editTask()
-    addEventListener("dblclick")
+    newRow.addEventListener("dblclick", function(event){ 
+        editTask(event);
+    });
 
     //clear input fields after adding task
     document.getElementById("taskName").value = "";
@@ -74,10 +76,74 @@ function daysUntilDue(dueDate)
     const daysUntil = Math.ceil(differenceMill/(1000 * 60 * 60 * 24));
     return daysUntil;
 }
+
 function editTask(event)
 {
-    alert("double clicked");
+    //alert("double clicked");
+    //open inputs again but keep what's already there
+    const currentRow = event.target.closest("tr");//get row that was double-clicked
+    if (!currentRow) return;
+    const currentCells = currentRow.querySelectorAll("td"); //get all cells in that row
+    //store current row values
+    const ctaskName = currentCells[0].textContent; //only stores the text
+    const curgency = currentCells[1].textContent;
+    const cimportance = currentCells[2].textContent;
+    const cdifficulty = currentCells[3].textContent;
+    const cdueDate = currentCells[4].textContent;
+    //replace row with input fields
+    currentCells[0].innerHTML = `<input type ="text" id="taskName" value ="${ctaskName}"/>`; //${} template literals let u put variable inside the string
+    //dropdowns, set current selection to what's currently in the cell, make select with all options
+    //${curgency === "Urgent"? "selected" : ""} keeps current selected value
+    currentCells[1].innerHTML = `
+    <select id="urgencyDropdown">
+        <option value="Urgent" ${curgency === "Urgent"? "selected" : ""}>Urgent</option>
+        <option value="Not Urgent" ${curgency === "Not Urgent"? "selected" : ""}>Not Urgent</option>
+    </select>
+    `;
+    currentCells[2].innerHTML = `
+    <select id="importanceDropdown">
+    <option value="Important" ${cimportance === "Important" ? "selected" : ""}>Important</option>
+    <option value="Not Important" ${cimportance === "Not Important" ? "selected" : ""}>Not Important</option>
+    </select>
+    `;
+    currentCells[3].innerHTML = `
+    <select id="difficultyDropdown">
+    <option value="Easy" ${cdifficulty === "Easy" ? "selected" : ""}>Easy</option>
+    <option value="Medium" ${cdifficulty === "Medium" ? "selected" : ""}>Medium</option>
+    <option value="Hard" ${cdifficulty === "Hard" ? "selected" : ""}>Hard</option>
+    <option value="Very Hard" ${cdifficulty === "Very Hard" ? "selected" : ""}>Very Hard</option>
+    </select>
+    `;
+    currentCells[4].innerHTML = `<input type ="date" id="dueDate" value ="${cdueDate}"/>`;
+    
+    //when user clicks off of row or presses enter, update task in row and array
+    //event listener for table, onblur event
+    //function() waits for event to happen then run update
+    currentRow.addEventListener("blur", function(){updateTask(currentRow)}, true);
+    currentRow.addEventListener("keydown", function(event){if(event.key === "Enter"){updateTask(currentRow);}});
 }
+
+//update row and array
+function updateTask(row)
+{
+    const taskName = row.querySelector("#taskName").value;
+    const urgency = row.querySelector("#urgencyDropdown").value;
+    const importance = row.querySelector("#importanceDropdown").value;
+    const difficulty = row.querySelector("#difficultyDropdown").value;
+    const dueDate = row.querySelector("#dueDate").value;
+    const daysUntil = daysUntilDue(dueDate);
+
+    row.innerHTML = `
+        <td>${taskName}</td>
+        <td>${urgency}</td>
+        <td>${importance}</td>
+        <td>${difficulty}</td>
+        <td>${dueDate}</td>
+        <td>${daysUntil}</td>
+        <td><input type="checkbox" onclick="deleteTask(this)"></td>
+    `;
+}
+
 
 //deletes task
 function deleteTask(event)
