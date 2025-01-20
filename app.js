@@ -51,12 +51,13 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     tasks.push({taskName, urgency, importance, difficulty,dueDate,daysUntil});
     sortTasks();
     //console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
-    
+    /*
     //add ondblclick to each created row and call editTask()
     newRow.addEventListener("dblclick", function(event){ 
         editTask(event);
+        
     });
-
+    */
     //clear input fields after adding task
     document.getElementById("taskName").value = "";
     document.getElementById("urgencyDropdown").value = "selectOption";
