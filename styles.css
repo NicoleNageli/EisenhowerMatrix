@@ -4,17 +4,20 @@ body{
     color: CanvasText;
     color-scheme: light dark;
 }
+@media screen {
+    
 .container {
     display: flex;
     flex-direction: row-reverse;
-    flex-wrap: nowrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 .container div {
     margin: 10px;
 }
 .toDoList {
     /*color:black;*/
-    float: left;
+    flex: 1 1 30%;
     text-align: left;
     /*background-color: beige;*/
   }
@@ -23,17 +26,33 @@ body{
     border: 1px solid #282828;
     border-collapse: collapse;
     /*background-color: white;*/
-    border-spacing: 50%;
     text-align: center;
+    width: 100%;
 }
 
 
 div.eisenhowerMatrix {
+    flex: 3 3 60%;
     /*color: black;*/
     text-align: center;
-    background-color:#505050;
-    float: right;
+    background-color:#393939;
   }
   h1 {
     text-align: center;
   }
+  @media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .toDoList {
+        flex: 1 1 100%; /* Take up full width in column layout */
+        margin-bottom: 20px; /* Add some space between elements */
+        overflow-y: auto;
+    }
+
+    div.eisenhowerMatrix {
+        flex: 1 1 100%; /* Take up full width in column layout */
+    }
+}
+}
