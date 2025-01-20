@@ -155,3 +155,5 @@ function deleteTask(event)
     var row = event.closest("tr");
     row.remove();
 }
+
+//sort tasks into quadrants
