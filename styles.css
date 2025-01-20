@@ -120,24 +120,49 @@ h1 {
       position: absolute;
       top: 50%;
   }
-  
-  .quadrantTitle{
-      position: absolute;
-      padding: 4px 10px;
-      background-color: #F0F4F8;
-      border-radius: 2px;
-      font-weight: 700;
-      color: #314863;
-  }
-  
-  .task-list {
-    /*background-color: red;*/
-  }
-  .quadrant1 {
-    /* make bigger*/
-    /*background-color:aqua;*/
-  }
-  
+
+  .quadrant {
+    background-color: #61a185;
+    width: 100%; 
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* For correct title positioning */
+    margin: -10px; /* Slight enlargement */
+}
+
+.quadrantTitle {
+    position: absolute;
+    padding: 4px 10px;
+    background-color: #F0F4F8;
+    border-radius: 2px;
+    font-weight: 700;
+    color: #314863;
+}
+
+/* Specific positioning for each quadrant */
+#q1 .quadrantTitle {
+    top: 0%;
+    left: 0%
+}
+
+#q2 .quadrantTitle {
+    top: 0%;
+    right: 0%;
+}
+
+#q3 .quadrantTitle {
+    bottom: 0%;
+    left: 0%;
+}
+
+#q4 .quadrantTitle {
+    bottom: 0%;
+    right: 0%;
+}
+
+#q1 {
+}
   @media (max-width: 1200px) {
     .container {
         flex-direction: column; /* Stack items vertically */
