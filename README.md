@@ -1,4 +1,4 @@
-# Eisenhowe Matrix
+# Eisenhower Matrix
 To-do list with eisenhower matrix that prioritizes tasks.
 
 ## To Do
