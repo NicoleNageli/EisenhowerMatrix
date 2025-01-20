@@ -1,6 +1,8 @@
 body{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-    
+    background-color: Canvas;
+    color: CanvasText;
+    color-scheme: light dark;
 }
 .container {
     display: flex;
@@ -11,23 +13,25 @@ body{
     margin: 10px;
 }
 .toDoList {
+    /*color:black;*/
     float: left;
     text-align: left;
-    background-color: beige;
+    /*background-color: beige;*/
   }
 .taskTable, th, td {
     font-size: small;
-    border: 1px solid black;
+    border: 1px solid #282828;
     border-collapse: collapse;
-    background-color: white;
+    /*background-color: white;*/
     border-spacing: 50%;
     text-align: center;
 }
 
 
 div.eisenhowerMatrix {
+    /*color: black;*/
     text-align: center;
-    background-color:aliceblue;
+    background-color:#505050;
     float: right;
   }
   h1 {
