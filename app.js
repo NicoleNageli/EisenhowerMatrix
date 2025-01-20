@@ -49,6 +49,7 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
 
     //push instead of append bc more than 1+ new value to be added
     tasks.push({taskName, urgency, importance, difficulty,dueDate,daysUntil});
+    sortTasks();
     console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
     
     //add ondblclick to each created row and call editTask()
@@ -154,6 +155,65 @@ function deleteTask(event)
 {
     var row = event.closest("tr");
     row.remove();
+    //need to remove from matrix too
+    
 }
 
 //sort tasks into quadrants
+function sortTasks() {
+    let q1 = [];
+    let q2 = [];
+    let q3 = [];
+    let q4 = [];
+
+    tasks.forEach(task => {
+        const { urgency, importance, dueDate, difficulty } = task;
+        const daysUntil = task.daysUntil;
+
+        // Q1: Important and urgent / due in 2 days or less
+        if ((importance === 'Important' && urgency === 'Urgent') || daysUntil <= 2) {
+            q1.push(task);
+        }
+        // Q2: Important but not urgent
+        else if (importance === 'Important' && urgency === 'Not Urgent') {
+            q2.push(task);
+        }
+        // Q3: Not important but urgent
+        else if (importance === 'Not Important' && urgency === 'Urgent') {
+            q3.push(task);
+        }
+        // Q4: Not important and not urgent
+        else {
+            q4.push(task);
+        }
+    });
+
+    // Sort tasks within each quadrant based on difficulty
+    q1.sort((a, b) => b.difficulty - a.difficulty); // Highest difficulty first
+    q2.sort((a, b) => b.difficulty - a.difficulty);
+    q3.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)); // Sort by due date in ascending order
+
+    appendTasksToQuadrant(q1, 'q1');
+    appendTasksToQuadrant(q2, 'q2');
+    appendTasksToQuadrant(q3, 'q3');
+    appendTasksToQuadrant(q4, 'q4');
+}
+
+// Function to append tasks to their respective quadrant
+function appendTasksToQuadrant(tasks, quadrantId) {
+    const quadrant = document.getElementById(quadrantId);
+    const taskList = quadrant.querySelector('.task-list');
+    if(!taskList) return;
+    taskList.innerHTML = ''; // Clear previous content
+
+    tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.classList.add('task-item');
+        taskItem.innerHTML = `
+            <input type="checkbox" onclick="deleteTask(this)">
+            <span>${task.taskName}</span>
+            <span>Difficulty: ${task.difficulty}</span>
+        `;
+        taskList.appendChild(taskItem);
+    });
+}

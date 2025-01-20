@@ -20,7 +20,7 @@ to-do list side by side with eisenhower matrix that sorts tasks into 4 quadrants
     
     * display checkbox, task name, difficulty
     * mark complete, cross & gray out task in to do list & remove from matrix
-    * flex & overflow
+    -[x] flex & overflow
     - [ ] can drag and drop tasks into different sections?
     - [x] if due in 2 days or less, highlight days cell red in to do list
        - [ ] move to urgent and important quadrant
@@ -28,6 +28,6 @@ to-do list side by side with eisenhower matrix that sorts tasks into 4 quadrants
     
 - [ ] shaaaapes and colorrrrs
     - [x] make matrix bigger and to do list on the side smaller
-    * color code tasks for difficulty
+    * color code tasks for difficulty?
     * colors for each matrix quadrant
 - [ ] maybe a productivity quote that changes every two hours at the top?
