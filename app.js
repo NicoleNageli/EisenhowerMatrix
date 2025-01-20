@@ -43,7 +43,7 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     <td>${importance}</td>
     <td>${difficulty}</td>
     <td>${dueDate}</td>
-    <td>${daysUntil}</td>
+    <td class="${daysUntil <= 2 ? 'highlight-red' : ''}">${daysUntil}</td>
     <td><input type="checkbox" onclick="deleteTask(this)"></td>
     `;
 
@@ -133,13 +133,17 @@ function updateTask(row)
     const dueDate = row.querySelector("#dueDate").value;
     const daysUntil = daysUntilDue(dueDate);
 
+    // Find the "Days Until" cell
+    const daysCell = row.querySelector("td:nth-child(6)");
+
+    // If days until 2 or less, make the cell red & add to Q1
     row.innerHTML = `
         <td>${taskName}</td>
         <td>${urgency}</td>
         <td>${importance}</td>
         <td>${difficulty}</td>
         <td>${dueDate}</td>
-        <td>${daysUntil}</td>
+        <td class="${daysUntil <= 2 ? 'highlight-red' : ''}">${daysUntil}</td>
         <td><input type="checkbox" onclick="deleteTask(this)"></td>
     `;
 }

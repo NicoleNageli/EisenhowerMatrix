@@ -29,6 +29,10 @@ body{
     text-align: center;
     width: 100%;
 }
+.highlight-red {
+    background-color: rgb(147, 5, 5);
+    color: white; 
+}
 
 
 div.eisenhowerMatrix {
