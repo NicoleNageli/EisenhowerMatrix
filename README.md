@@ -3,7 +3,7 @@ To-do list with eisenhower matrix that prioritizes tasks.
 
 ## To Do
 - [x] add new task to table
-- [x] edit & update task works
+- [ ] edit & update tasks needs to update on matrix
 - [x] delete task option
 - [ ] add hover over information for table headers and quadrants
 - [x] make eisenhower matrix quadrants

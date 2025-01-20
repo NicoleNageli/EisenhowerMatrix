@@ -43,7 +43,6 @@ h1 {
   }
   .matrix{
       grid-column: 7/13;
-      margin: 58px 36px 30px 30px;
       justify-self: center;
       align-self: center;
       font-size: 14px;
