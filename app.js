@@ -164,9 +164,16 @@ function updateTask(row)
     const dueDate = row.querySelector("#dueDate").value;
     const daysUntil = daysUntilDue(dueDate);
 
-    // Find the "Days Until" cell
+    //find "Days Until" cell
     const daysCell = row.querySelector("td:nth-child(6)");
+    
 
+    // Update the task in the tasks array
+    const taskIndex = tasks.findIndex(task => task.taskName === taskName);
+    if (taskIndex !== -1) {
+        tasks[taskIndex] = { taskName, urgency, importance, difficulty, dueDate, daysUntil };
+    }
+    //update row in table
     // If days until 2 or less, make the cell red & add to Q1
     row.innerHTML = `
         <td>${taskName}</td>
@@ -177,6 +184,12 @@ function updateTask(row)
         <td class="${daysUntil <= 2 ? 'highlight-red' : ''}">${daysUntil}</td>
         <td><input type="checkbox" onclick="deleteTask(this)"></td>
     `;
+
+    //remove old task
+    removeTaskFromMatrix(taskName);
+
+    //resort
+    sortTasks();
 }
 
 
@@ -186,8 +199,9 @@ function deleteTask(event)
     var row = event.closest("tr");
     var taskName = row.querySelector("td:nth-child(1)").textContent; // Get task name
     row.remove();
-    //need to remove from array and matrix too
+    //need to remove from array
     tasks = tasks.filter(task => task.taskName !== taskName);
+    //remove from matrix
     removeTaskFromMatrix(taskName);
     sortTasks();
 }
@@ -252,7 +266,7 @@ function appendTasksToQuadrant(tasks, quadrantId) {
     const quadrant = document.getElementById(quadrantId);
     const taskList = quadrant.querySelector('.task-list');
     if(!taskList) return;
-    taskList.innerHTML = ''; // Clear previous content
+    taskList.innerHTML = ''; 
 
     tasks.forEach(task => {
         const taskItem = document.createElement('li');

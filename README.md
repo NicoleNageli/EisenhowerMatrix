@@ -3,7 +3,7 @@ To-do list with eisenhower matrix that prioritizes tasks.
 
 ## To Do
 - [x] add new task to table
-- [ ] edit & update tasks needs to update on matrix
+- [ ] edit & update tasks
 - [x] delete task option
 - [ ] add hover over information for table headers and quadrants
 - [x] make eisenhower matrix quadrants
@@ -23,9 +23,3 @@ To-do list with eisenhower matrix that prioritizes tasks.
     - [x] flex & overflow
     - [x] if due in 2 days or less, highlight days cell red in to do list
        - [x] move to urgent and important quadrant
-
-    
-- [ ] shaaaapes and colorrrrs
-    - [x] make matrix bigger and to do list on the side smaller
-    - [ ] colors for each matrix quadrant
-- [ ] maybe a productivity quote that changes every two hours at the top?
