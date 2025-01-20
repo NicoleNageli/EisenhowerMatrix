@@ -50,7 +50,7 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     //push instead of append bc more than 1+ new value to be added
     tasks.push({taskName, urgency, importance, difficulty,dueDate,daysUntil});
     sortTasks();
-    console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
+    //console.log("Task Added: ", taskName, urgency, importance, difficulty,dueDate,daysUntil);
     
     //add ondblclick to each created row and call editTask()
     newRow.addEventListener("dblclick", function(event){ 
@@ -63,6 +63,7 @@ function addTask(taskName, urgency, importance, difficulty,dueDate,daysUntil)
     document.getElementById("importanceDropdown").value = "selectOption";
     document.getElementById("difficultyDropdown").value = "selectOption";
     document.getElementById("dueDate").value = "";
+    document.getElementById("daysUntilCell").value = ""; //idk why this isnt clearing
     
 }
 
@@ -124,6 +125,35 @@ function editTask(event)
     currentRow.addEventListener("keydown", function(event){if(event.key === "Enter"){updateTask(currentRow);}});
 }
 
+function handleMatrixCheckbox(checkbox, taskName) {
+    console.log(`Checkbox for task: ${taskName} clicked. Checked: ${checkbox.checked}`);
+
+    // Find the task in the to-do list by matching task name
+    const taskRows = Array.from(document.querySelectorAll(".taskTable tbody tr"));
+    const taskItem = taskRows.find(row => {
+        const taskNameCell = row.querySelector("td");
+        if (taskNameCell) {
+            console.log(`Comparing: "${taskNameCell.textContent.trim()}" with "${taskName.trim()}"`);
+            return taskNameCell.textContent.trim() === taskName.trim();
+        }
+        return false;
+    });
+
+    if (taskItem) {
+        const taskCells = taskItem.querySelectorAll("td");
+        if (checkbox.checked) {
+            taskCells.forEach(cell => {cell.style.textDecoration = "line-through";
+                cell.style.color = "gray";});
+        } else { //reset row
+            taskCells.forEach(cell => {cell.style.textDecoration = "none";
+                cell.style.color = "black";});
+        }
+    } else {
+        console.error(`Task "${taskName}" not found in the to-do list.`);
+    }
+}
+
+
 //update row and array
 function updateTask(row)
 {
@@ -156,8 +186,10 @@ function deleteTask(event)
     var row = event.closest("tr");
     var taskName = row.querySelector("td:nth-child(1)").textContent; // Get task name
     row.remove();
-    //need to remove from matrix too
+    //need to remove from array and matrix too
+    tasks = tasks.filter(task => task.taskName !== taskName);
     removeTaskFromMatrix(taskName);
+    sortTasks();
 }
 
 function removeTaskFromMatrix(taskName) {
@@ -172,19 +204,6 @@ function removeTaskFromMatrix(taskName) {
             taskItem.remove();
         }
     });
-}
-
-function markTaskComplete(event) {
-    const checkbox = event.target;
-    const taskItem = checkbox.closest('li');
-    
-    if (checkbox.checked) {
-        taskItem.style.textDecoration = "line-through";  // Strikethrough task
-        taskItem.style.color = "gray"; // Make task gray
-    } else {
-        taskItem.style.textDecoration = "none";  // Remove strikethrough
-        taskItem.style.color = "black";  // Restore original color
-    }
 }
 
 
@@ -239,10 +258,11 @@ function appendTasksToQuadrant(tasks, quadrantId) {
         const taskItem = document.createElement('li');
         taskItem.classList.add('task-item');
         taskItem.innerHTML = `
-            <input type="checkbox" onclick="markTaskComplete(this)">
-            <span>${task.taskName}</span>
-            <span>Difficulty: ${task.difficulty}</span>
+        <input type="checkbox" onclick="handleMatrixCheckbox(this, '${task.taskName}')">
+        <span>${task.taskName}</span>
+        <span>Difficulty: ${task.difficulty}</span>
         `;
+
         taskList.appendChild(taskItem);
     });
 }
