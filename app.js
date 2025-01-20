@@ -154,10 +154,39 @@ function updateTask(row)
 function deleteTask(event)
 {
     var row = event.closest("tr");
+    var taskName = row.querySelector("td:nth-child(1)").textContent; // Get task name
     row.remove();
     //need to remove from matrix too
-    
+    removeTaskFromMatrix(taskName);
 }
+
+function removeTaskFromMatrix(taskName) {
+    // Loop through each quadrant and remove the task if found
+    ['q1', 'q2', 'q3', 'q4'].forEach(quadrantId => {
+        const quadrant = document.getElementById(quadrantId);
+        const taskList = quadrant.querySelector('.task-list');
+        
+        // Find the task item by task name
+        const taskItem = Array.from(taskList.children).find(item => item.textContent.includes(taskName));
+        if (taskItem) {
+            taskItem.remove();
+        }
+    });
+}
+
+function markTaskComplete(event) {
+    const checkbox = event.target;
+    const taskItem = checkbox.closest('li');
+    
+    if (checkbox.checked) {
+        taskItem.style.textDecoration = "line-through";  // Strikethrough task
+        taskItem.style.color = "gray"; // Make task gray
+    } else {
+        taskItem.style.textDecoration = "none";  // Remove strikethrough
+        taskItem.style.color = "black";  // Restore original color
+    }
+}
+
 
 //sort tasks into quadrants
 function sortTasks() {
@@ -210,7 +239,7 @@ function appendTasksToQuadrant(tasks, quadrantId) {
         const taskItem = document.createElement('li');
         taskItem.classList.add('task-item');
         taskItem.innerHTML = `
-            <input type="checkbox" onclick="deleteTask(this)">
+            <input type="checkbox" onclick="markTaskComplete(this)">
             <span>${task.taskName}</span>
             <span>Difficulty: ${task.difficulty}</span>
         `;
