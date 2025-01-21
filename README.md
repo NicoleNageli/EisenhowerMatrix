@@ -20,6 +20,7 @@ To-do list with eisenhower matrix that automatically prioritizes tasks.
     - [x] flex & overflow
     - [x] if due in 2 days or less, highlight days cell red in to do list
        - [x] move to urgent and important quadrant
+- [ ] take into account very hard difficulty for important tasks, if very hard & important it should be in Q1 or Q2
 - [ ] fix when matrix unchecked, task disappears from list
 - [ ] edit & update tasks feature
 - [ ] add hover over information for table headers and quadrants (not really needed)
