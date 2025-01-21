@@ -22,5 +22,5 @@ To-do list with eisenhower matrix that automatically prioritizes tasks.
        - [x] move to urgent and important quadrant
 - [ ] fix when matrix unchecked, task disappears from list
 - [ ] edit & update tasks feature
-- [ ] add hover over information for table headers and quadrants (not really needed
+- [ ] add hover over information for table headers and quadrants (not really needed)
 
