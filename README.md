@@ -25,4 +25,5 @@ To-do list with eisenhower matrix that automatically prioritizes tasks.
 - [ ] fix when matrix unchecked, task disappears from list
 - [ ] edit & update tasks feature
 - [ ] add hover over information for table headers and quadrants (not really needed)
+- [ ] fix screen size for mobile
 
